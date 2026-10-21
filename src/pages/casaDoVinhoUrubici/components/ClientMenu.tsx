@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
+// Order mirrors the rendered page exactly (master spec hierarchy).
 const items = [
-  { id: "a-casa", label: "A Casa" },
   { id: "destaques", label: "Destaques" },
   { id: "colecoes", label: "Coleções" },
   { id: "vinhos", label: "Catálogo" },
   { id: "vinicolas", label: "Vinícolas" },
   { id: "servicos", label: "Serviços" },
   { id: "selecao", label: "Minha Seleção" },
+  { id: "a-casa", label: "A Casa" },
   { id: "galeria", label: "Galeria" },
   { id: "avaliacoes", label: "Avaliações" },
   { id: "onde-estamos", label: "Onde Estamos" },
@@ -17,7 +18,7 @@ const items = [
 ];
 
 export default function ClientMenu() {
-  const [active, setActive] = useState("a-casa");
+  const [active, setActive] = useState(items[0].id);
 
   useEffect(() => {
     const sections = items
@@ -46,6 +47,7 @@ export default function ClientMenu() {
             key={item.id}
             className={`menu-link${active === item.id ? " is-active" : ""}`}
             href={`#${item.id}`}
+            aria-current={active === item.id ? "true" : undefined}
           >
             {item.label}
           </a>

@@ -3,6 +3,7 @@ import { wines } from "@/mocks/casaDoVinho/wines";
 import { casaConfig } from "@/mocks/casaDoVinho/config";
 import type { Selection, Wine } from "../types";
 import type { MouseEvent } from "react";
+import { handleImageError } from "../utils/imageFallback";
 
 type Props = {
   selection: Selection;
@@ -76,7 +77,7 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              08 — Minha Seleção
+              06 — Minha Seleção
             </p>
             <h2 id="selecao-title" data-reveal>
               Sua lista, sem <em className="accent">pressa</em>.
@@ -112,6 +113,7 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
                   height={58}
                   loading="lazy"
                   decoding="async"
+                  onError={handleImageError}
                 />
                 <div>
                   <p className="sel-row__name">{r.wine.name}</p>
@@ -185,6 +187,12 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
               Nenhum valor é cobrado nesta página. Disponibilidade, safra e entrega são
               combinadas diretamente com a Casa do Vinho.
             </p>
+            {!casaConfig.whatsappVerified && (
+              <p className="sel-note sel-note--flag">
+                Número de WhatsApp provisório nesta prévia do Portal. O número oficial e a
+                confirmação de atendimento serão publicados pela casa antes do lançamento.
+              </p>
+            )}
           </div>
         </div>
       </div>

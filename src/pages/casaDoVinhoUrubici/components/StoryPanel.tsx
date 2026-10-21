@@ -15,13 +15,17 @@ export default function StoryPanel() {
       <div className="panel-veil" aria-hidden="true" />
       <div className="panel-copy" data-parallax="-0.08">
         <p className="stamp" data-reveal>
-          03 — A Casa
+          07 — A Casa
         </p>
         <h2 id="a-casa-title" data-reveal>
           Uma casa feita
           <br />
           de <em className="accent">tempo</em>.
         </h2>
+        <p className="story-lead" data-reveal>
+          A serra impõe o frio. Nós respondemos com fogo — garrafas escolhidas a dedo e
+          taças que esperam a conversa certa.
+        </p>
         <p className="sub" data-reveal>
           A Casa do Vinho nasceu do encontro entre a noite fria de Urubici e a vontade de
           abrir uma garrafa boa. Um balcão de madeira, prateleiras até o teto e uma porta
@@ -33,8 +37,8 @@ export default function StoryPanel() {
             prateleira. O que não convence a casa, não chega ao balcão.
           </p>
         </div>
-        <a className="cta cta--ghost" href="#colecoes" data-reveal>
-          Conhecer as coleções
+        <a className="cta cta--ghost" href="#contato" data-reveal>
+          Falar com a casa
           <i className="ri-arrow-right-line" aria-hidden="true"></i>
         </a>
       </div>

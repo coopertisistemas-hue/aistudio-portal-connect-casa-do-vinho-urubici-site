@@ -35,7 +35,7 @@ export const winerySlots = [
   },
   {
     id: "slot-2",
-    title: "Coleção patrocinada",
+    title: "Coleção assinada (disponível)",
     text: "Uma coleção assinada pela sua vinícola, com destaque na home e no catálogo do Portal."
   }
 ];

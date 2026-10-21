@@ -1,38 +1,47 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { wineries, winerySlots } from "@/mocks/casaDoVinho/wineries";
 import { wines } from "@/mocks/casaDoVinho/wines";
+import { casaConfig } from "@/mocks/casaDoVinho/config";
+import { useDialogA11y } from "../hooks/useDialogA11y";
+import { handleImageError } from "../utils/imageFallback";
 import type { Winery } from "../types";
 
-function WineryModal({ winery, onClose }: { winery: Winery; onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+function placementLabel(winery: Winery) {
+  if (!winery.paid) return winery.placement;
+  return casaConfig.monetizationVerified ? `${winery.placement} · espaço pago` : "Perfil editorial";
+}
 
+function WineryModal({ winery, onClose }: { winery: Winery; onClose: () => void }) {
+  const dialogRef = useDialogA11y<HTMLDivElement>(true, onClose);
   const related = wines.filter((w) => w.winery.toLowerCase().includes(winery.name.toLowerCase()));
 
   return createPortal(
-    <div
-      className="modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="winery-title"
-      onClick={onClose}
-    >
-      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" type="button" onClick={onClose} aria-label="Fechar">
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-card"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="winery-title"
+        tabIndex={-1}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" type="button" onClick={onClose} aria-label="Fechar perfil da vinícola">
           <i className="ri-close-line" aria-hidden="true"></i>
         </button>
         <div className="detail-grid">
           <div className="detail-media">
-            <img src={winery.image} alt={`Vinícola ${winery.name}`} width={1400} height={1000} />
+            <img
+              src={winery.image}
+              alt={`Vinícola ${winery.name}`}
+              width={1400}
+              height={1000}
+              onError={handleImageError}
+            />
           </div>
           <div className="detail-body">
-            <p className="stamp">{winery.placement}</p>
+            <p className="stamp">{placementLabel(winery)}</p>
             <h2 id="winery-title">{winery.name}</h2>
             <p className="detail-note">{winery.tagline}</p>
             <p style={{ margin: "0 0 4px", fontSize: 14, lineHeight: 1.7, color: "color-mix(in srgb, var(--text) 80%, transparent)" }}>
@@ -96,7 +105,7 @@ export default function WineriesPanel() {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              06 — Vinícolas
+              04 — Vinícolas
             </p>
             <h2 id="vinicolas-title" data-reveal>
               Quem faz o vinho<br />
@@ -108,11 +117,17 @@ export default function WineriesPanel() {
             </p>
           </div>
           <p className="section-head__side" data-reveal>
-            Perfis premium e coleções patrocinadas são identificados como espaços comerciais.
+            {casaConfig.monetizationVerified
+              ? "Perfis premium e coleções patrocinadas são identificados como espaços comerciais."
+              : "Perfis editoriais. Nenhum espaço pago é exibido sem contrato verificado."}
           </p>
         </div>
 
         <div className="winery-grid">
+          <p className="section-note">
+            Perfis editoriais em revisão com as vinícolas: origem, rótulos e histórias são
+            confirmados pela casa antes da publicação no Portal.
+          </p>
           {(wineries as Winery[]).map((w) => (
             <article className="winery-card" key={w.id} data-reveal>
               <div className="winery-card__media">
@@ -123,9 +138,14 @@ export default function WineriesPanel() {
                   height={1000}
                   loading="lazy"
                   decoding="async"
+                  onError={handleImageError}
                 />
-                <span className={`placement-badge${w.paid ? " placement-badge--paid" : ""}`}>
-                  {w.paid ? `${w.placement} · espaço pago` : w.placement}
+                <span
+                  className={`placement-badge${
+                    w.paid && casaConfig.monetizationVerified ? " placement-badge--paid" : ""
+                  }`}
+                >
+                  {placementLabel(w)}
                 </span>
               </div>
               <div className="winery-card__body">
@@ -147,7 +167,7 @@ export default function WineriesPanel() {
 
           {winerySlots.map((s) => (
             <div className="slot-card" key={s.id} data-reveal>
-              <p className="stamp">Espaço comercial</p>
+              <p className="stamp">Espaço disponível · não contratado</p>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
               <a href="#contato">Quero este espaço</a>
@@ -156,8 +176,9 @@ export default function WineriesPanel() {
         </div>
 
         <p className="monetize-note">
-          Destaques e perfis identificados como pagos são espaços comerciais do Portal. A
-          casa não publica rótulos que não prove.
+          {casaConfig.monetizationVerified
+            ? "Destaques e perfis identificados como pagos são espaços comerciais do Portal."
+            : "Nenhuma vinícola, rótulo ou parceria paga é apresentada como contratada até a confirmação da casa."}
         </p>
       </div>
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { wines } from "@/mocks/casaDoVinho/wines";
 import { casaConfig } from "@/mocks/casaDoVinho/config";
 import type { Selection, Wine } from "../types";
+import { handleImageError } from "../utils/imageFallback";
 import WineDetailModal from "./WineDetailModal";
 
 type Props = {
@@ -48,7 +49,7 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              02 — Destaques da casa
+              01 — Destaques da casa
             </p>
             <h2 id="destaques-title" data-reveal>
               As garrafas que
@@ -56,9 +57,9 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
               saem <em className="accent">primeiro</em>.
             </h2>
             <p data-reveal>
-              Quatro rótulos escolhidos pela casa para começar a conversa — dois deles em
-              espaço comercial destacado, sempre identificado. Toque na garrafa para ler as
-              notas de degustação.
+              Quatro rótulos escolhidos pela casa para começar a conversa. Toque na
+              garrafa para ler as notas de degustação e montar a sua seleção — sem preço na
+              tela e sem compra online.
             </p>
           </div>
           <p className="section-head__side" data-reveal>
@@ -75,7 +76,7 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
                 onClick={() => setDetail(w)}
                 aria-label={`Ver detalhes de ${w.name}`}
               >
-                {casaConfig.featuredWineIds.includes(w.id) && (
+                {casaConfig.monetizationVerified && casaConfig.featuredWineIds.includes(w.id) && (
                   <span className="wine-card__badge">Destaque pago</span>
                 )}
                 <img
@@ -85,6 +86,7 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
                   height={1125}
                   loading="lazy"
                   decoding="async"
+                  onError={handleImageError}
                 />
               </button>
               <div className="featured-card__body">

@@ -19,7 +19,7 @@ export default function ServicesPanel() {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              07 — Produtos e serviços
+              05 — Produtos e serviços
             </p>
             <h2 id="servicos-title" data-reveal>
               Tudo o que acompanha<br />a <em className="accent">garrafa</em>.

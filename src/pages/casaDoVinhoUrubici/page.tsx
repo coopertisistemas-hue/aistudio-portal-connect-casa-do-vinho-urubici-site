@@ -6,20 +6,20 @@ import "./sections.css";
 import PortalBar from "./components/PortalBar";
 import Chapter from "./components/Chapter";
 import ClientMenu from "./components/ClientMenu";
-import Manifesto from "./components/Manifesto";
 import FeaturedBottles from "./components/FeaturedBottles";
-import StoryPanel from "./components/StoryPanel";
 import CollectionsPanel from "./components/CollectionsPanel";
 import CatalogPanel from "./components/CatalogPanel";
 import WineriesPanel from "./components/WineriesPanel";
 import ServicesPanel from "./components/ServicesPanel";
 import SelectionPanel from "./components/SelectionPanel";
+import StoryPanel from "./components/StoryPanel";
 import GalleryPanel from "./components/GalleryPanel";
 import ReviewsPanel from "./components/ReviewsPanel";
 import LocationsPanel from "./components/LocationsPanel";
 import FaqPanel from "./components/FaqPanel";
 import PortalPanel from "./components/PortalPanel";
 import ContactPanel from "./components/ContactPanel";
+import SelectionDock from "./components/SelectionDock";
 import { usePanelMotion } from "./hooks/usePanelMotion";
 import type { Selection } from "./types";
 
@@ -46,15 +46,18 @@ export default function CasaDoVinhoUrubici() {
       <PortalBar />
       <Chapter />
       <ClientMenu />
+      {/* Commercial hierarchy per master spec:
+          hero → menu → featured bottles → collections → catalog → wineries →
+          services → Minha Seleção → compact brand + gallery → reviews → map →
+          FAQ → Portal integrations → contact */}
       <main>
-        <Manifesto />
         <FeaturedBottles selection={selection} onAdd={add} />
-        <StoryPanel />
         <CollectionsPanel />
         <CatalogPanel selection={selection} onAdd={add} />
         <WineriesPanel />
         <ServicesPanel />
         <SelectionPanel selection={selection} onAdd={add} onRemove={remove} />
+        <StoryPanel />
         <GalleryPanel />
         <ReviewsPanel />
         <LocationsPanel />
@@ -62,6 +65,7 @@ export default function CasaDoVinhoUrubici() {
         <PortalPanel />
         <ContactPanel />
       </main>
+      <SelectionDock selection={selection} />
     </div>
   );
 }

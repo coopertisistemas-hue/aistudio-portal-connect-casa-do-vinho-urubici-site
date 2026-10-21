@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { wines } from "@/mocks/casaDoVinho/wines";
-import { casaConfig } from "@/mocks/casaDoVinho/config";
 import type { Selection, Wine } from "../types";
+import { handleImageError } from "../utils/imageFallback";
 import WineDetailModal from "./WineDetailModal";
 
 type Props = {
@@ -83,7 +83,7 @@ export default function CatalogPanel({ onAdd, selection }: Props) {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              05 — Catálogo
+              03 — Catálogo
             </p>
             <h2 id="vinhos-title" data-reveal>
               Encontre a sua <em className="accent">garrafa</em>.
@@ -192,9 +192,6 @@ export default function CatalogPanel({ onAdd, selection }: Props) {
               aria-label={`Ver detalhes de ${w.name}`}
             >
               <span className="wine-card__thumb">
-                {casaConfig.featuredWineIds.includes(w.id) && (
-                  <span className="wine-card__badge">Destaque pago</span>
-                )}
                 <img
                   src={w.image}
                   alt={`Garrafa de ${w.name}, ${w.winery}`}
@@ -202,6 +199,7 @@ export default function CatalogPanel({ onAdd, selection }: Props) {
                   height={1125}
                   loading="lazy"
                   decoding="async"
+                  onError={handleImageError}
                 />
               </span>
               <span className="wine-card__body">
