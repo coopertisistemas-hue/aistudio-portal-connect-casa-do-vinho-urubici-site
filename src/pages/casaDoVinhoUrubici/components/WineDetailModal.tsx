@@ -1,6 +1,7 @@
-import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import type { Wine } from "../types";
+import { useDialogA11y } from "../hooks/useDialogA11y";
+import { handleImageError } from "../utils/imageFallback";
 
 type Props = {
   wine: Wine | null;
@@ -9,37 +10,36 @@ type Props = {
 };
 
 export default function WineDetailModal({ wine, onClose, onAdd }: Props) {
-  useEffect(() => {
-    if (!wine) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [wine, onClose]);
+  // Hook runs unconditionally: it only engages while a bottle is open.
+  const dialogRef = useDialogA11y<HTMLDivElement>(Boolean(wine), onClose);
 
   if (!wine) return null;
 
   return createPortal(
-    <div
-      className="modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="wine-detail-title"
-      onClick={onClose}
-    >
-      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" type="button" onClick={onClose} aria-label="Fechar">
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-card"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="wine-detail-title"
+        aria-describedby="wine-detail-note"
+        tabIndex={-1}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" type="button" onClick={onClose} aria-label="Fechar detalhes do rótulo">
           <i className="ri-close-line" aria-hidden="true"></i>
         </button>
         <div className="detail-grid">
           <div className="detail-media">
-            <img src={wine.image} alt={`Garrafa de ${wine.name}`} width={900} height={1125} />
+            <img
+              src={wine.image}
+              alt={`Ilustração da garrafa de ${wine.name}`}
+              width={900}
+              height={1125}
+              decoding="async"
+              onError={handleImageError}
+            />
           </div>
           <div className="detail-body">
             <p className="stamp">{wine.collection}</p>
@@ -50,7 +50,9 @@ export default function WineDetailModal({ wine, onClose, onAdd }: Props) {
               <span className="spec-pill">{wine.country}</span>
               <span className="spec-pill">{wine.serve}</span>
             </div>
-            <p className="detail-note">{wine.notes}</p>
+            <p className="detail-note" id="wine-detail-note">
+              {wine.notes}
+            </p>
             <dl style={{ margin: 0 }}>
               <div className="detail-row">
                 <dt>Vinícola</dt>
@@ -72,6 +74,10 @@ export default function WineDetailModal({ wine, onClose, onAdd }: Props) {
                 </dd>
               </div>
             </dl>
+            <p className="media-note">
+              Ficha e imagem ilustrativas nesta prévia do Portal. Rótulo, safra e dados
+              oficiais são confirmados pela casa antes da publicação.
+            </p>
             <div className="detail-actions">
               <button className="cta" type="button" onClick={() => onAdd(wine.id)}>
                 Adicionar à Minha Seleção

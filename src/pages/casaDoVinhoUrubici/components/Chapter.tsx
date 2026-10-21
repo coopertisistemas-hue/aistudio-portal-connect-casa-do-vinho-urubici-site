@@ -38,7 +38,7 @@ export default function Chapter() {
           data-motion="track"
           id="abertura"
         >
-          <p className="stamp">01 · Casa do Vinho · Urubici</p>
+          <p className="stamp">Casa do Vinho · Urubici</p>
           <h1 data-split="lines">
             <span className="line">
               <span className="line-in">Uma cave acesa</span>
@@ -68,7 +68,7 @@ export default function Chapter() {
           data-motion="drift"
           id="colecao"
         >
-          <p className="stamp">02 · A coleção</p>
+          <p className="stamp">A coleção da casa</p>
           <h2 data-split="lines">
             <span className="line">
               <span className="line-in">Rótulos que</span>

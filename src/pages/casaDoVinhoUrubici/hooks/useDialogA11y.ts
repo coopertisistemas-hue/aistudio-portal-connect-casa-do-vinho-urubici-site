@@ -6,9 +6,13 @@ const FOCUSABLE =
 /**
  * Keyboard behaviour for the detail dialogs: initial focus, Tab containment,
  * Escape to close, focus restored to the trigger, and page scroll locked while open.
+ * The close callback is held in a ref so an inline arrow from the parent cannot
+ * restart the effect and steal focus on every re-render.
  */
 export function useDialogA11y<T extends HTMLElement>(open: boolean, onClose: () => void) {
   const ref = useRef<T>(null);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
 
   useEffect(() => {
     if (!open) return;
@@ -28,7 +32,7 @@ export function useDialogA11y<T extends HTMLElement>(open: boolean, onClose: () 
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.stopPropagation();
-        onClose();
+        closeRef.current();
         return;
       }
       if (event.key !== "Tab" || !node) return;
@@ -64,7 +68,7 @@ export function useDialogA11y<T extends HTMLElement>(open: boolean, onClose: () 
         previouslyFocused.focus({ preventScroll: true });
       }
     };
-  }, [open, onClose]);
+  }, [open]);
 
   return ref;
 }

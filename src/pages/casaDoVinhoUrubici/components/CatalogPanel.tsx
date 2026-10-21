@@ -99,6 +99,11 @@ export default function CatalogPanel({ onAdd, selection }: Props) {
           </p>
         </div>
 
+        <p className="media-note" data-reveal>
+          Catálogo de demonstração: imagens geradas e fichas em revisão. Nenhum rótulo,
+          safra ou disponibilidade abaixo é oficial até a confirmação da casa.
+        </p>
+
         <div className="catalog-tools" data-reveal>
           <div className="search-wrap">
             <i className="ri-search-line" aria-hidden="true"></i>

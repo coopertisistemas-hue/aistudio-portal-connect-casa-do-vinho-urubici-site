@@ -4,7 +4,7 @@ export default function StoryPanel() {
       <img
         className="panel-bg"
         src="https://readdy.ai/api/search-image?query=Candlelit%20wine%20cellar%20interior%20with%20dark%20timber%20shelves%20full%20of%20bottles%2C%20a%20worn%20wooden%20counter%20and%20two%20crystal%20glasses%2C%20open%20doorway%20showing%20blue%20mountain%20dusk%2C%20the%20main%20subject%20sits%20in%20the%20left%20third%20of%20the%20frame%20and%20the%20right%20half%20stays%20calm%20and%20empty%20in%20deep%20brown%20shadow%2C%20warm%20amber%20light%2C%20cinematic%20editorial%20photography&width=2400&height=1350&seq=cdv-story-cellar&orientation=landscape"
-        alt="Interior da cave da Casa do Vinho, com prateleiras de madeira, velas e a porta aberta para a noite da serra"
+        alt="Ilustração de ambientação de uma cave com prateleiras de madeira, velas e a porta aberta para a noite da serra"
         width={2400}
         height={1350}
         loading="eager"
@@ -25,6 +25,9 @@ export default function StoryPanel() {
         <p className="story-lead" data-reveal>
           A serra impõe o frio. Nós respondemos com fogo — garrafas escolhidas a dedo e
           taças que esperam a conversa certa.
+        </p>
+        <p className="media-note" data-reveal>
+          Imagem ilustrativa de ambientação nesta prévia — não é um registro da loja.
         </p>
         <p className="sub" data-reveal>
           A Casa do Vinho nasceu do encontro entre a noite fria de Urubici e a vontade de

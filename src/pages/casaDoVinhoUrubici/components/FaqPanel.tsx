@@ -22,7 +22,7 @@ export default function FaqPanel() {
         <div className="section-head" style={{ justifyContent: "center", textAlign: "center" }}>
           <div>
             <p className="stamp" data-reveal>
-              12 — Dúvidas
+              11 — Dúvidas
             </p>
             <h2 id="faq-title" data-reveal>
               Antes de subir a <em className="accent">serra</em>.

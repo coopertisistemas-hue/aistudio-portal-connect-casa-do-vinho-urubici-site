@@ -1,4 +1,5 @@
 import { galleryImages } from "@/mocks/casaDoVinho/gallery";
+import { handleImageError } from "../utils/imageFallback";
 
 const spans = ["gallery-item--tall", "", "gallery-item--wide", "", "gallery-item--wide", ""];
 
@@ -8,7 +9,7 @@ export default function GalleryPanel() {
       <img
         className="panel-bg"
         src="https://readdy.ai/api/search-image?query=Old%20stone%20and%20dark%20timber%20cellar%20wall%20with%20a%20single%20warm%20lamp%20glow%20and%20soft%20falling%20dust%2C%20an%20empty%20quiet%20texture%20with%20no%20subject%2C%20deep%20umber%20and%20amber%20tones%2C%20very%20soft%20focus%2C%20cinematic%20background%20plate&width=2400&height=1350&seq=cdv-gallery-texture&orientation=landscape"
-        alt="Parede de pedra e madeira da cave em luz baixa"
+        alt="Parede de pedra e madeira em luz baixa, textura de fundo"
         width={2400}
         height={1350}
         loading="eager"
@@ -24,15 +25,16 @@ export default function GalleryPanel() {
               08 — Galeria
             </p>
             <h2 id="galeria-title" data-reveal>
-              A cave como ela <em className="accent">é</em>.
+              O clima da <em className="accent">cave</em>.
             </h2>
             <p data-reveal>
-              Luz de vela, madeira gasta e garrafas que chegaram de longe. Registros do
-              balcão e da porta aberta para a serra.
+              Luz de vela, madeira gasta e garrafas que chegaram de longe. A ambientação que
+              recebe quem sobe a serra, na medida do que a prévia permite mostrar.
             </p>
           </div>
           <p className="section-head__side" data-reveal>
-            Imagens de ambientação autorizadas para uso no Portal Urubici.
+            Imagens ilustrativas de ambientação nesta prévia. Os registros originais da
+            boutique entram antes da publicação no Portal.
           </p>
         </div>
 
@@ -41,13 +43,15 @@ export default function GalleryPanel() {
             <figure className={`gallery-item ${spans[i] || ""}`} key={g.id} data-reveal>
               <img
                 src={g.image}
-                alt={g.alt}
+                alt={`Ilustração de ambientação: ${g.alt}`}
                 width={1200}
                 height={900}
                 loading="lazy"
                 decoding="async"
+                onError={handleImageError}
                 title={`Casa do Vinho Urubici — ${g.caption}`}
               />
+              <span className="gallery-flag">Ilustração</span>
               <figcaption>{g.caption}</figcaption>
             </figure>
           ))}

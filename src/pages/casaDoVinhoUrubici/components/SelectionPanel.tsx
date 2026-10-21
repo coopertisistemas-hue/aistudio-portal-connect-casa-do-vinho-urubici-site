@@ -30,8 +30,8 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
 
   const bottles = rows.reduce((sum, r) => sum + r.qty, 0);
 
-  const message = useMemo(() => {
-    const lines = [
+  const { messageText, message } = useMemo(() => {
+    const text = [
       `Olá, Casa do Vinho Urubici! Sou ${name || "…"}.`,
       "",
       "Minha seleção:",
@@ -39,23 +39,39 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
       "",
       `Telefone para contato: ${phone || "…"}`,
       "Pode confirmar disponibilidade e condições?"
-    ];
-    return encodeURIComponent(lines.join("\n"));
+    ].join("\n");
+    return { messageText: text, message: encodeURIComponent(text) };
   }, [name, phone, rows]);
 
   const waHref = `https://wa.me/${casaConfig.whatsappNumber}?text=${message}`;
 
-  const handleWhats = (e: MouseEvent<HTMLAnchorElement>) => {
+  const validate = () => {
     if (!rows.length) {
-      e.preventDefault();
       setError("Escolha pelo menos um rótulo no catálogo para enviar a seleção.");
-      return;
+      return false;
     }
     if (!name.trim() || phone.trim().length < 8) {
-      e.preventDefault();
       setError("Informe seu nome e um telefone com DDD para que a casa consiga responder.");
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
+  const handleWhats = (e: MouseEvent<HTMLAnchorElement>) => {
+    // The provisional number must never open a real conversation.
+    if (!casaConfig.whatsappVerified) {
+      e.preventDefault();
+      setError(
+        "O WhatsApp oficial da casa ainda não foi confirmado nesta prévia. A mensagem fica pronta abaixo e não é enviada."
+      );
       return;
     }
+    if (!validate()) e.preventDefault();
+  };
+
+  const handlePreview = () => {
+    if (!validate()) return;
     setError("");
   };
 
@@ -168,16 +184,33 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
                 autoComplete="tel"
               />
             </div>
-            <a
-              className="cta"
-              href={waHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleWhats}
-            >
-              <i className="ri-whatsapp-line" aria-hidden="true"></i>
-              Enviar seleção pelo WhatsApp
-            </a>
+            {casaConfig.whatsappVerified ? (
+              <a
+                className="cta"
+                href={waHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleWhats}
+              >
+                <i className="ri-whatsapp-line" aria-hidden="true"></i>
+                Enviar seleção pelo WhatsApp
+              </a>
+            ) : (
+              <button className="cta" type="button" onClick={handlePreview}>
+                <i className="ri-file-text-line" aria-hidden="true"></i>
+                Gerar mensagem para a casa
+              </button>
+            )}
+            {rows.length > 0 && (
+              <div className="wa-preview">
+                <p className="wa-preview__label">
+                  {casaConfig.whatsappVerified
+                    ? "Mensagem que será enviada"
+                    : "Prévia da mensagem · nada foi enviado"}
+                </p>
+                <pre className="wa-preview__text">{messageText}</pre>
+              </div>
+            )}
             {error && (
               <p className="form-status is-err" role="alert">
                 {error}
@@ -190,7 +223,8 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
             {!casaConfig.whatsappVerified && (
               <p className="sel-note sel-note--flag">
                 Número de WhatsApp provisório nesta prévia do Portal. O número oficial e a
-                confirmação de atendimento serão publicados pela casa antes do lançamento.
+                confirmação de atendimento serão publicados pela casa antes do lançamento —
+                até lá, nenhuma mensagem é enviada a partir desta página.
               </p>
             )}
           </div>

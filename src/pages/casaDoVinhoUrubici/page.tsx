@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./chapter.css";
 import "./panels.css";
 import "./commerce.css";
@@ -21,11 +21,23 @@ import PortalPanel from "./components/PortalPanel";
 import ContactPanel from "./components/ContactPanel";
 import SelectionDock from "./components/SelectionDock";
 import { usePanelMotion } from "./hooks/usePanelMotion";
+import { markImageFailed } from "./utils/imageFallback";
 import type { Selection } from "./types";
 
 export default function CasaDoVinhoUrubici() {
   usePanelMotion();
   const [selection, setSelection] = useState<Selection>({});
+
+  // One capture-phase listener covers every <img> on the page, including the ones
+  // mounted later inside the detail dialogs, so no broken-image icon ever shows.
+  useEffect(() => {
+    const onError = (event: Event) => {
+      const target = event.target;
+      if (target instanceof HTMLImageElement) markImageFailed(target);
+    };
+    document.addEventListener("error", onError, true);
+    return () => document.removeEventListener("error", onError, true);
+  }, []);
 
   const add = useCallback((id: string) => {
     setSelection((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));

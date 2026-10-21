@@ -19,7 +19,7 @@ export default function LocationsPanel() {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              11 — Onde estamos
+              10 — Onde estamos
             </p>
             <h2 id="mapa-title" data-reveal>
               No centro de <em className="accent">Urubici</em>.
@@ -49,7 +49,11 @@ export default function LocationsPanel() {
               </div>
               <div>
                 <dt>Contato</dt>
-                <dd>{casaConfig.whatsappDisplay}</dd>
+                <dd>
+                  {casaConfig.whatsappVerified
+                    ? casaConfig.whatsappDisplay
+                    : `${casaConfig.whatsappDisplay} — número provisório de prévia`}
+                </dd>
               </div>
               <div>
                 <dt>Unidades</dt>

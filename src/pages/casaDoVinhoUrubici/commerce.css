@@ -852,3 +852,227 @@
 .featured-foot a {
   text-decoration: none;
 }
+
+/* ---------- PREVIEW DISCLOSURE ---------- */
+.media-note {
+  margin: 10px 0 0;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 78ch;
+}
+
+.gallery-flag {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  z-index: 2;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(12, 6, 3, 0.72);
+  border: 1px solid color-mix(in srgb, var(--accent2) 42%, transparent);
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  pointer-events: none;
+}
+
+/* ---------- IMAGE FALLBACK ---------- */
+.wine-card__thumb[data-media-failed],
+.featured-card__media[data-media-failed],
+.detail-media[data-media-failed],
+.winery-card__media[data-media-failed],
+.gallery-item[data-media-failed] {
+  background-image: radial-gradient(circle at 50% 42%, #2a1a11 0%, #150c07 72%);
+}
+
+.wine-card__thumb[data-media-failed]::after,
+.featured-card__media[data-media-failed]::after {
+  content: "Sem imagem";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  pointer-events: none;
+}
+
+/* ---------- SELECTION DOCK ---------- */
+.sel-dock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  padding: 8px 10px 8px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 36%, transparent);
+  background: color-mix(in srgb, #1b0f08 93%, transparent);
+  backdrop-filter: blur(16px);
+  animation: dock-in 0.42s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.sel-dock__count {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff4ea;
+  font-family: var(--font-label);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.sel-dock__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sel-dock__text strong {
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.sel-dock__text > span {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.sel-dock__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 2px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 48%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: var(--text);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+.sel-dock__link:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff4ea;
+}
+
+@keyframes dock-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 520px) {
+  .sel-dock {
+    gap: 9px;
+    padding: 7px 8px;
+  }
+
+  .sel-dock__text > span {
+    display: none;
+  }
+
+  .sel-dock__text strong {
+    font-size: 11.5px;
+  }
+
+  .sel-dock__link {
+    padding: 7px 12px;
+  }
+}
+
+/* ---------- WHATSAPP PREVIEW / PENDING ---------- */
+button.cta {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+.wa-preview {
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 9px;
+  padding: 11px 13px;
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+}
+
+.wa-preview__label {
+  margin: 0 0 6px;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+.wa-preview__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.sel-note--flag {
+  padding: 9px 11px;
+  border-radius: 7px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.wa-link--pending {
+  cursor: default;
+  opacity: 0.82;
+  border-style: dashed;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+
+.wa-link--pending:hover {
+  background: transparent;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sel-dock {
+    animation: none;
+    transform: translateX(-50%);
+  }
+}

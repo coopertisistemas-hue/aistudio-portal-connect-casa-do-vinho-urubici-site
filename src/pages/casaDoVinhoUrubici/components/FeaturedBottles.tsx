@@ -67,6 +67,11 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
           </p>
         </div>
 
+        <p className="media-note" data-reveal>
+          Prévia: imagens e fichas ilustrativas. As fotos oficiais dos rótulos e os dados de
+          safra entram com o catálogo da casa.
+        </p>
+
         <div className="featured-rail" data-reveal>
           {ordered.map((w) => (
             <article className="featured-card" key={w.id}>

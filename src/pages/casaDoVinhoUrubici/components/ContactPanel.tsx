@@ -99,7 +99,7 @@ export default function ContactPanel() {
         <div className="contact-grid">
           <div className="contact-aside">
             <p className="stamp" data-reveal>
-              14 — Contato
+              13 — Contato
             </p>
             <h2 id="contato-title" data-reveal>
               Vamos escolher<br />a sua <em className="accent">garrafa</em>.
@@ -120,16 +120,29 @@ export default function ContactPanel() {
                 Visitas e degustações com agendamento prévio.
               </span>
             </div>
-            <a
-              className="wa-link"
-              data-reveal
-              href={`https://wa.me/${casaConfig.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="ri-whatsapp-line" aria-hidden="true"></i>
-              WhatsApp direto da casa
-            </a>
+            {casaConfig.whatsappVerified ? (
+              <a
+                className="wa-link"
+                data-reveal
+                href={`https://wa.me/${casaConfig.whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="ri-whatsapp-line" aria-hidden="true"></i>
+                WhatsApp direto da casa
+              </a>
+            ) : (
+              <>
+                <span className="wa-link wa-link--pending" data-reveal>
+                  <i className="ri-whatsapp-line" aria-hidden="true"></i>
+                  WhatsApp — número em confirmação
+                </span>
+                <p className="sel-note sel-note--flag" data-reveal>
+                  O número exibido nesta prévia é provisório e não abre conversa: o contato
+                  oficial será publicado pela casa antes do lançamento.
+                </p>
+              </>
+            )}
             <div className="pull" data-reveal>
               <p>
                 Prefere vir primeiro? Suba a serra, entre na cave e prove. A porta fica
@@ -219,6 +232,11 @@ export default function ContactPanel() {
             <p className="sel-note">
               Ao enviar, você concorda em ser contatado pela Casa do Vinho sobre este
               pedido. Nenhum dado é usado para outro fim.
+            </p>
+            <p className="sel-note sel-note--flag">
+              Formulário de demonstração da prévia: as mensagens chegam ao ambiente de
+              protótipo do Portal, não à operação da casa. O envio oficial será ativado na
+              integração com o Portal Urubici.
             </p>
           </form>
         </div>
