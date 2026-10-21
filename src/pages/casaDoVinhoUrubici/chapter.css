@@ -1,0 +1,672 @@
+/* Casa do Vinho Urubici — tokens, portal bar, cinematic chapter
+   palette from the film cover:
+   bg #160b05 · surface #241a14 · text #f4e6d8 · muted #b39c88
+   accent #c94a2b · accent2 #e0996a */
+
+:root {
+  --bg: #160b05;
+  --surface: #241a14;
+  --text: #f4e6d8;
+  --muted: #b39c88;
+  --accent: #c94a2b;
+  --accent2: #e0996a;
+  --line: color-mix(in srgb, var(--text) 12%, transparent);
+  --font-heading: "Futura", "Futura PT", "Jost", "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-heading);
+  --font-accent: "Playfair Display", Georgia, serif;
+  --font-label: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.casa-root {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+.casa-root *,
+.casa-root *::before,
+.casa-root *::after {
+  box-sizing: border-box;
+}
+
+.casa-root :is(h1, h2, h3, h4) {
+  font-family: var(--font-heading);
+}
+
+.casa-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.casa-root button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.casa-root img {
+  display: block;
+}
+
+.casa-root :is(h1, h2, h3) .accent,
+.casa-root .accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--accent2);
+}
+
+.stamp {
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin: 0;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff4ea;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  width: fit-content;
+  border: 0;
+  transition: background 0.28s ease, transform 0.28s ease;
+}
+
+.cta:hover {
+  background: color-mix(in srgb, var(--accent) 82%, #000);
+  transform: translateY(-2px);
+}
+
+.cta i {
+  transition: transform 0.28s ease;
+}
+
+.cta:hover i {
+  transform: translateX(4px);
+}
+
+.cta--ghost {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text) 32%, transparent);
+  color: var(--text);
+}
+
+.cta--ghost:hover {
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  border-color: color-mix(in srgb, var(--text) 55%, transparent);
+}
+
+.cta--gold {
+  background: var(--accent2);
+  color: #23130a;
+}
+
+.cta--gold:hover {
+  background: color-mix(in srgb, var(--accent2) 84%, #000);
+}
+
+/* ---------- PORTAL BAR ---------- */
+.portal-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px clamp(20px, 4vw, 56px);
+  color: var(--text);
+  background: linear-gradient(to bottom, rgba(8, 4, 2, 0.6), transparent);
+}
+
+.portal-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.portal-bar__mark {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  border: 1px solid color-mix(in srgb, var(--accent2) 45%, transparent);
+  padding: 7px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.portal-bar__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-label);
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.portal-bar__back:hover {
+  color: var(--accent2);
+}
+
+.portal-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.portal-bar__brand {
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+  display: none;
+}
+
+.portal-bar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff3e8;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.28s ease, transform 0.28s ease;
+}
+
+.portal-bar__cta:hover {
+  background: color-mix(in srgb, var(--accent) 84%, #000);
+  transform: translateY(-2px);
+}
+
+@media (min-width: 900px) {
+  .portal-bar__brand {
+    display: block;
+  }
+}
+
+/* ---------- CHAPTER ---------- */
+.chapter {
+  position: relative;
+  height: 100svh;
+}
+
+.stage {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.stage .plate,
+.stage video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.stage video {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.stage.is-live video {
+  opacity: 1;
+}
+
+.stage .veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--bg) 62%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 22%, transparent) 32%,
+    transparent 58%
+  );
+}
+
+.stage .veil:not(.veil-deep):not(.veil-light)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.stage:has(.beat.is-on[data-pos="left"]) .veil:not(.veil-deep):not(.veil-light)::after {
+  opacity: 1;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--bg) 66%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 40%, transparent) 30%,
+    transparent 62%
+  );
+}
+
+.stage:has(.beat.is-on[data-pos="right"]) .veil:not(.veil-deep):not(.veil-light)::after {
+  opacity: 1;
+  background: linear-gradient(
+    to left,
+    color-mix(in srgb, var(--bg) 66%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 40%, transparent) 30%,
+    transparent 62%
+  );
+}
+
+.stage .veil-deep {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--bg) 72%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 40%, transparent) 38%,
+    transparent 70%
+  );
+}
+
+.stage:has(.beat.is-on[data-depth="busy"]) .veil-deep {
+  opacity: 1;
+}
+
+.stage .veil-light {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: color-mix(in srgb, var(--bg) 42%, transparent);
+}
+
+.stage:has(.beat.is-on[data-tone="light"]) .veil-light {
+  opacity: 1;
+}
+
+.beat {
+  position: absolute;
+  inset: 0;
+  padding: clamp(20px, 4vw, 56px) clamp(24px, 8vw, 160px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  color: var(--text);
+  pointer-events: none;
+  transform: translate(
+    calc(var(--mx, 0) * 14px),
+    calc((var(--local, 0.5) - 0.5) * -18px + var(--my, 0) * 10px + var(--exit, 0) * -12vh)
+  );
+  will-change: transform;
+}
+
+.beat > *:not(.chips) {
+  opacity: var(--o, 0);
+  will-change: transform, opacity;
+}
+
+/* first beat is present before the driver runs (and with the film still loading) */
+.stage > .beat[data-from="0"] > *:not(.chips) {
+  --o: 1;
+}
+
+.stage > .beat[data-from="0"] .line-in {
+  --o-inv: 0;
+}
+
+.beat.is-on > *,
+.beat.is-on .chips li {
+  pointer-events: auto;
+}
+
+.beat[data-pos="left"] {
+  align-items: flex-start;
+  text-align: left;
+  padding-right: 52vw;
+}
+
+.beat[data-pos="right"] {
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 52vw;
+}
+
+.beat[data-pos="bottom"] {
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 14vh;
+}
+
+.beat[data-pos="top"] {
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding-top: 16vh;
+}
+
+.beat[data-pos="center"] {
+  align-items: center;
+  text-align: center;
+  padding-left: clamp(20px, 8vw, 120px);
+  padding-right: clamp(20px, 8vw, 120px);
+}
+
+.beat :is(h1, h2) {
+  font-size: clamp(32px, 5.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  margin: 0;
+  max-width: 14ch;
+}
+
+.beat[data-pos="bottom"] :is(h1, h2),
+.beat[data-pos="top"] :is(h1, h2) {
+  max-width: 20ch;
+}
+
+.beat h1 {
+  font-size: clamp(40px, 6.6vw, 96px);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  max-width: 16ch;
+}
+
+.beat .sub {
+  font-size: clamp(15px, 1.3vw, 19px);
+  line-height: 1.45;
+  max-width: 38ch;
+  margin: 0;
+  opacity: calc(var(--o, 0) * 0.92);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+.beat .cta {
+  margin-top: 10px;
+}
+
+.beat .line {
+  display: block;
+  overflow: hidden;
+  padding: 0.12em 0.08em 0.22em;
+  margin: -0.12em -0.08em -0.22em;
+}
+
+.beat .line-in {
+  display: block;
+  transform: translateY(calc(var(--o-inv, 1) * 130%));
+}
+
+.beat[data-motion="rise"] > *:not(.chips) {
+  transform: translateY(calc(var(--o-inv, 1) * var(--dir, -1) * -36px));
+}
+
+.beat[data-motion="drift"] > *:not(.chips) {
+  transform: translateX(calc(var(--o-inv, 1) * var(--dir, -1) * var(--side, -1) * 48px));
+}
+
+.beat[data-pos="right"][data-motion="drift"] {
+  --side: 1;
+}
+
+.beat[data-motion="zoom"] > *:not(.chips) {
+  transform: scale(calc(1 + var(--o-inv, 1) * var(--dir, -1) * -0.06));
+  transform-origin: left center;
+}
+
+.beat[data-motion="track"] :is(h1, h2) {
+  letter-spacing: calc(-0.045em + var(--o-inv, 1) * 0.1em);
+}
+
+.beat[data-motion="track"] > *:not(.chips) {
+  transform: translateY(calc(var(--o-inv, 1) * var(--dir, -1) * -16px));
+}
+
+.beat.is-leaving > *:not(.chips) {
+  filter: blur(calc(var(--o-inv, 0) * 6px));
+}
+
+.beat .chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(
+    calc(var(--mx, 0) * 10px),
+    calc(-50% + (var(--local, 0.5) - 0.5) * -34px + var(--my, 0) * 8px + var(--exit, 0) * -8vh)
+  );
+  display: grid;
+  gap: 10px;
+}
+
+.beat .chips[data-side="right"] {
+  right: clamp(24px, 8vw, 160px);
+  justify-items: end;
+}
+
+.beat .chips[data-side="left"] {
+  left: clamp(24px, 8vw, 160px);
+  justify-items: start;
+}
+
+.beat .chips li {
+  padding: 8px 13px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 66%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  opacity: var(--o, 0);
+  transform: translateY(calc(var(--o-inv, 1) * 12px));
+  white-space: nowrap;
+}
+
+.stage .scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(58px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: 22px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1.5px solid color-mix(in srgb, var(--text) 45%, transparent);
+  opacity: calc(var(--cue, 1) * (1 - var(--exit, 0)) * 0.8);
+  transition: opacity 0.5s ease;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.stage .scroll-cue span {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--text);
+  margin-left: -1.5px;
+  animation: cue-drop 1.9s ease-in-out infinite;
+}
+
+@keyframes cue-drop {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(11px);
+    opacity: 0.25;
+  }
+}
+
+.chapter.is-static {
+  height: auto;
+}
+
+.chapter.is-static .stage {
+  position: relative;
+  height: auto;
+  overflow: visible;
+  background: transparent;
+}
+
+.chapter.is-static .plate {
+  position: fixed;
+  z-index: -1;
+}
+
+.chapter.is-static .veil {
+  position: fixed;
+  z-index: -1;
+}
+
+.chapter.is-static .beat {
+  position: relative;
+  inset: auto;
+  min-height: 100svh;
+  pointer-events: auto;
+  transform: none;
+  padding-left: clamp(20px, 4vw, 56px);
+  padding-right: clamp(20px, 4vw, 56px);
+}
+
+.chapter.is-static .beat > *:not(.chips),
+.chapter.is-static .beat .chips li,
+.chapter.is-static .line-in {
+  --o: 1;
+  --o-inv: 0;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1;
+}
+
+.chapter.is-static .beat .chips {
+  position: static;
+  transform: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chapter.is-static video {
+  display: none;
+}
+
+.chapter.is-static .scroll-cue {
+  display: none;
+}
+
+.stage video,
+.plate {
+  filter: blur(var(--soften, 0px));
+}
+
+/* ---------- CLIENT MENU ---------- */
+.client-menu {
+  position: sticky;
+  top: 0;
+  z-index: 55;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+
+.client-menu__inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 clamp(16px, 4vw, 56px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.client-menu__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.client-menu__label {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  padding-right: 14px;
+  margin-right: 4px;
+  border-right: 1px solid var(--line);
+  white-space: nowrap;
+  flex: 0 0 auto;
+  display: none;
+}
+
+.menu-link {
+  position: relative;
+  display: inline-block;
+  padding: 15px 2px;
+  margin-right: 22px;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: color 0.25s ease;
+}
+
+.menu-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  height: 1px;
+  width: 100%;
+  background: var(--accent2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.menu-link:hover {
+  color: var(--text);
+}
+
+.menu-link:hover::after,
+.menu-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.menu-link.is-active {
+  color: var(--accent2);
+}
+
+@media (min-width: 900px) {
+  .client-menu__label {
+    display: block;
+  }
+}
