@@ -21,7 +21,7 @@ export default function GalleryPanel() {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              08 — Galeria
+              09 — Galeria
             </p>
             <h2 id="galeria-title" data-reveal>
               A cave como ela <em className="accent">é</em>.

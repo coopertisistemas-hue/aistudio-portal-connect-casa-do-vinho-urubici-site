@@ -7,12 +7,13 @@ import PortalBar from "./components/PortalBar";
 import Chapter from "./components/Chapter";
 import ClientMenu from "./components/ClientMenu";
 import Manifesto from "./components/Manifesto";
+import FeaturedBottles from "./components/FeaturedBottles";
 import StoryPanel from "./components/StoryPanel";
 import CollectionsPanel from "./components/CollectionsPanel";
 import CatalogPanel from "./components/CatalogPanel";
-import SelectionPanel from "./components/SelectionPanel";
 import WineriesPanel from "./components/WineriesPanel";
 import ServicesPanel from "./components/ServicesPanel";
+import SelectionPanel from "./components/SelectionPanel";
 import GalleryPanel from "./components/GalleryPanel";
 import ReviewsPanel from "./components/ReviewsPanel";
 import LocationsPanel from "./components/LocationsPanel";
@@ -47,12 +48,13 @@ export default function CasaDoVinhoUrubici() {
       <ClientMenu />
       <main>
         <Manifesto />
+        <FeaturedBottles selection={selection} onAdd={add} />
         <StoryPanel />
         <CollectionsPanel />
         <CatalogPanel selection={selection} onAdd={add} />
-        <SelectionPanel selection={selection} onAdd={add} onRemove={remove} />
         <WineriesPanel />
         <ServicesPanel />
+        <SelectionPanel selection={selection} onAdd={add} onRemove={remove} />
         <GalleryPanel />
         <ReviewsPanel />
         <LocationsPanel />

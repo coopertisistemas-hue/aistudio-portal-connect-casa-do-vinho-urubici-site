@@ -83,7 +83,7 @@ export default function CatalogPanel({ onAdd, selection }: Props) {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              04 — Catálogo
+              05 — Catálogo
             </p>
             <h2 id="vinhos-title" data-reveal>
               Encontre a sua <em className="accent">garrafa</em>.

@@ -99,7 +99,7 @@ export default function ContactPanel() {
         <div className="contact-grid">
           <div className="contact-aside">
             <p className="stamp" data-reveal>
-              13 — Contato
+              14 — Contato
             </p>
             <h2 id="contato-title" data-reveal>
               Vamos escolher<br />a sua <em className="accent">garrafa</em>.

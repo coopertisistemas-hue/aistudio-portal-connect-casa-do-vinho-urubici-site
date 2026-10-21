@@ -42,7 +42,7 @@ export default function CollectionsPanel() {
       <div className="panel-veil" aria-hidden="true" />
       <div className="panel-copy panel-copy--list" data-parallax="-0.08" style={{ maxWidth: "min(640px, 100%)" }}>
         <p className="stamp" data-reveal>
-          03 — Coleções
+          04 — Coleções
         </p>
         <h2 id="colecoes-title" data-reveal>
           Casas que

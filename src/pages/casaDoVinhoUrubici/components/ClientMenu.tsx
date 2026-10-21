@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 
 const items = [
   { id: "a-casa", label: "A Casa" },
+  { id: "destaques", label: "Destaques" },
   { id: "colecoes", label: "Coleções" },
   { id: "vinhos", label: "Catálogo" },
-  { id: "selecao", label: "Minha Seleção" },
   { id: "vinicolas", label: "Vinícolas" },
   { id: "servicos", label: "Serviços" },
+  { id: "selecao", label: "Minha Seleção" },
   { id: "galeria", label: "Galeria" },
   { id: "avaliacoes", label: "Avaliações" },
   { id: "onde-estamos", label: "Onde Estamos" },

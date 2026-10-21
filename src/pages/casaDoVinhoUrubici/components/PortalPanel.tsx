@@ -19,7 +19,7 @@ export default function PortalPanel() {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              12 — Portal Urubici
+              13 — Portal Urubici
             </p>
             <h2 id="portal-title" data-reveal>
               A serra inteira,<br />na mesma <em className="accent">navegação</em>.

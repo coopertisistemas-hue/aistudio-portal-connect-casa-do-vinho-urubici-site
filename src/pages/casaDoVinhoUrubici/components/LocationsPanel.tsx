@@ -19,7 +19,7 @@ export default function LocationsPanel() {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              10 — Onde estamos
+              11 — Onde estamos
             </p>
             <h2 id="mapa-title" data-reveal>
               No centro de <em className="accent">Urubici</em>.

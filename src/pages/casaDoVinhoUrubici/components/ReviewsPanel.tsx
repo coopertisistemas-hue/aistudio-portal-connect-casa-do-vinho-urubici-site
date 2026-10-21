@@ -20,7 +20,7 @@ export default function ReviewsPanel() {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              09 — Prova social
+              10 — Prova social
             </p>
             <h2 id="avaliacoes-title" data-reveal>
               Só o que é <em className="accent">verificado</em>.

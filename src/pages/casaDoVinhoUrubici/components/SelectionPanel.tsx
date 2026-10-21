@@ -76,7 +76,7 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
         <div className="section-head">
           <div>
             <p className="stamp" data-reveal>
-              05 — Minha Seleção
+              08 — Minha Seleção
             </p>
             <h2 id="selecao-title" data-reveal>
               Sua lista, sem <em className="accent">pressa</em>.

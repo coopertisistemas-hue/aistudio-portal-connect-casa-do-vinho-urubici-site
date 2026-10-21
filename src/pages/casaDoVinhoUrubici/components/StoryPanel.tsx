@@ -15,7 +15,7 @@ export default function StoryPanel() {
       <div className="panel-veil" aria-hidden="true" />
       <div className="panel-copy" data-parallax="-0.08">
         <p className="stamp" data-reveal>
-          02 — A Casa
+          03 — A Casa
         </p>
         <h2 id="a-casa-title" data-reveal>
           Uma casa feita
