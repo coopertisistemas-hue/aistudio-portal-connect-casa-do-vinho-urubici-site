@@ -31,10 +31,17 @@ export default function WineDetailModal({ wine, onClose, onAdd }: Props) {
           <i className="ri-close-line" aria-hidden="true"></i>
         </button>
         <div className="detail-grid">
-          <div className="detail-media">
+          <div
+            className="detail-media"
+            data-cutout={wine.imageKind === "official-cutout" ? true : undefined}
+          >
             <img
               src={wine.image}
-              alt={`Ilustração da garrafa de ${wine.name}`}
+              alt={
+                wine.imageKind === "official-cutout"
+                  ? `Foto oficial da garrafa ${wine.name}, ${wine.winery}`
+                  : `Imagem ilustrativa da garrafa de ${wine.name}, ${wine.winery}`
+              }
               width={900}
               height={1125}
               decoding="async"
@@ -75,8 +82,9 @@ export default function WineDetailModal({ wine, onClose, onAdd }: Props) {
               </div>
             </dl>
             <p className="media-note">
-              Ficha e imagem ilustrativas nesta prévia do Portal. Rótulo, safra e dados
-              oficiais são confirmados pela casa antes da publicação.
+              {wine.imageKind === "official-cutout"
+                ? `${wine.imageCredit ?? "Foto oficial do produto"}. Safra, lote e disponibilidade são confirmados pela casa antes de qualquer reserva.`
+                : "Ficha e imagem ilustrativas nesta prévia do Portal. Rótulo, safra e dados oficiais são confirmados pela casa antes da publicação."}
             </p>
             <div className="detail-actions">
               <button className="cta" type="button" onClick={() => onAdd(wine.id)}>

@@ -124,9 +124,14 @@ export default function SelectionPanel({ selection, onAdd, onRemove }: Props) {
               <div className="sel-row" key={r.wine.id}>
                 <img
                   src={r.wine.image}
-                  alt={`Garrafa de ${r.wine.name}`}
+                  alt={
+                    r.wine.imageKind === "official-cutout"
+                      ? `Foto oficial da garrafa ${r.wine.name}`
+                      : `Imagem ilustrativa da garrafa de ${r.wine.name}`
+                  }
                   width={46}
                   height={58}
+                  data-cutout={r.wine.imageKind === "official-cutout" ? true : undefined}
                   loading="lazy"
                   decoding="async"
                   onError={handleImageError}

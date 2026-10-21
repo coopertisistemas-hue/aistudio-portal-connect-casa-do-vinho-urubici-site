@@ -11,6 +11,14 @@ export type Wine = {
   pairing: string;
   serve: string;
   image: string;
+  /**
+   * "official-cutout" marks a verified, unmodified official product photograph
+   * on a transparent background. Rendered contained, not cropped, and never
+   * described to the user as an illustration.
+   */
+  imageKind?: "official-cutout";
+  /** Short provenance line shown next to official photography. */
+  imageCredit?: string;
 };
 
 export type Winery = {

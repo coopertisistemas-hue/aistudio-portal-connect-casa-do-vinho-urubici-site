@@ -906,6 +906,34 @@
   pointer-events: none;
 }
 
+/* ---------- OFFICIAL TRANSPARENT PRODUCT CUTOUT ---------- */
+/* Verified official product PNG on a transparent background. It must be
+   contained, never cropped to fill, otherwise the label would be cut. */
+.featured-card__media[data-cutout],
+.wine-card__thumb[data-cutout],
+.detail-media[data-cutout] {
+  background-color: #150c07;
+  background-image: radial-gradient(
+    ellipse at 50% 74%,
+    color-mix(in srgb, var(--accent) 26%, transparent) 0%,
+    transparent 66%
+  );
+}
+
+.featured-card__media[data-cutout] img,
+.wine-card__thumb[data-cutout] img,
+.detail-media[data-cutout] img {
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 6% 12% 3%;
+}
+
+.sel-row img[data-cutout] {
+  object-fit: contain;
+  background-color: #150c07;
+  padding: 2px;
+}
+
 /* ---------- SELECTION DOCK ---------- */
 .sel-dock {
   position: fixed;

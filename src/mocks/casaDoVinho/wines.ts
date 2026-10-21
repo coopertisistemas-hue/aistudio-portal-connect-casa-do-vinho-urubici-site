@@ -29,17 +29,22 @@ export const wines = [
   },
   {
     id: "comendador-tinto",
-    name: "Comendador Tinto Seco",
-    winery: "Vinícola Comendador",
-    region: "Vale dos Vinhedos",
+    name: "Comendador Tinto Seco Montepulciano",
+    winery: "Casa do Vinho · São Joaquim",
+    region: "São Joaquim · SC",
     country: "Brasil",
     type: "Tinto",
-    grape: "Tannat",
+    grape: "Montepulciano",
     collection: "Comendador",
-    notes: "Estrutura firme de Tannat, ameixa em compota, cacau e um toque de baunilha.",
-    pairing: "Churrasco, queijos azuis e ragu de carne.",
-    serve: "17–18 °C",
-    image: "https://readdy.ai/api/search-image?query=Ruby%20red%20wine%20bottle%20with%20classic%20ivory%20label%20and%20red%20wax%20seal%2C%20placed%20on%20a%20dark%20stone%20surface%20with%20a%20single%20candle%20flame%20reflected%20in%20the%20glass%2C%20moody%20low-key%20cellar%20backdrop%2C%20fine%20art%20product%20photography&width=900&height=1125&seq=cdv-wine-comendador-tinto&orientation=portrait"
+    notes:
+      "Coloração rubi com reflexos violáceos. Aromas de frutas vermelhas e ervas, corpo denso, taninos macios e baixa acidez.",
+    pairing:
+      "Carnes vermelhas grelhadas, massa à bolonhesa e queijos maturados como provolone e parmesão.",
+    serve: "16–18 °C",
+    image:
+      "https://public.readdy.ai/ai/img_res/sandbox/daaeb431035eb8ca1d104d3de0d1c417/47b9731d-7fb4-4b52-9391-45ffff466367_comendador-montepulciano-1503x1920.png",
+    imageKind: "official-cutout",
+    imageCredit: "Foto oficial do produto · Casa do Vinho"
   },
   {
     id: "comendador-branco",

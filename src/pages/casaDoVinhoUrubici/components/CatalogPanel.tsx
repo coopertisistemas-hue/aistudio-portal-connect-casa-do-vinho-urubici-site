@@ -100,8 +100,9 @@ export default function CatalogPanel({ onAdd, selection }: Props) {
         </div>
 
         <p className="media-note" data-reveal>
-          Catálogo de demonstração: imagens geradas e fichas em revisão. Nenhum rótulo,
-          safra ou disponibilidade abaixo é oficial até a confirmação da casa.
+          Catálogo de demonstração: somente a foto do Comendador Montepulciano é oficial; as
+          demais imagens são ilustrativas. Safra e disponibilidade só valem após confirmação
+          da casa.
         </p>
 
         <div className="catalog-tools" data-reveal>
@@ -196,10 +197,17 @@ export default function CatalogPanel({ onAdd, selection }: Props) {
               onClick={() => setDetail(w)}
               aria-label={`Ver detalhes de ${w.name}`}
             >
-              <span className="wine-card__thumb">
+              <span
+                className="wine-card__thumb"
+                data-cutout={w.imageKind === "official-cutout" ? true : undefined}
+              >
                 <img
                   src={w.image}
-                  alt={`Garrafa de ${w.name}, ${w.winery}`}
+                  alt={
+                    w.imageKind === "official-cutout"
+                      ? `Foto oficial da garrafa ${w.name}, ${w.winery}`
+                      : `Imagem ilustrativa da garrafa de ${w.name}, ${w.winery}`
+                  }
                   width={900}
                   height={1125}
                   loading="lazy"

@@ -68,8 +68,8 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
         </div>
 
         <p className="media-note" data-reveal>
-          Prévia: imagens e fichas ilustrativas. As fotos oficiais dos rótulos e os dados de
-          safra entram com o catálogo da casa.
+          Prévia: a foto do Comendador Montepulciano é a imagem oficial do produto; os demais
+          rótulos usam imagens ilustrativas. Safra e disponibilidade seguem em confirmação.
         </p>
 
         <div className="featured-rail" data-reveal>
@@ -78,6 +78,7 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
               <button
                 type="button"
                 className="featured-card__media"
+                data-cutout={w.imageKind === "official-cutout" ? true : undefined}
                 onClick={() => setDetail(w)}
                 aria-label={`Ver detalhes de ${w.name}`}
               >
@@ -86,7 +87,11 @@ export default function FeaturedBottles({ onAdd, selection }: Props) {
                 )}
                 <img
                   src={w.image}
-                  alt={`Garrafa de ${w.name}, ${w.winery}`}
+                  alt={
+                    w.imageKind === "official-cutout"
+                      ? `Foto oficial da garrafa ${w.name}, ${w.winery}`
+                      : `Imagem ilustrativa da garrafa de ${w.name}, ${w.winery}`
+                  }
                   width={900}
                   height={1125}
                   loading="lazy"
